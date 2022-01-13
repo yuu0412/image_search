@@ -1,0 +1,31 @@
+hydra:
+  run:
+    dir: data/output/logs/${now:%Y-%m-%d}/${now:%H-%M-%S}
+
+model:
+  name: 'efficientnet_b0'
+  loss_module: 'arcface'
+  use_fc: True
+  fc_dim: 512
+  dropout: 0.5
+  s: 30.0
+  margin: 0.50
+  ls_eps: 0.0
+  theta_zero: 0.785
+  pretrained: True
+
+criterion:
+  name: "CrossEntropyLoss"
+
+optimizer:
+  name: "Adam"
+  lr: 1e-3
+
+early_stopping:
+  patience: 2
+
+train_loader:
+  batch_size: 16
+
+val_loader:
+  batch_size: 64
